@@ -27,7 +27,7 @@ steps:
 
 - script: |
     pip install pytest
-    pytest tests --doctest-modules --junitxml=junit/test-results.xml
+    pytest --doctest-modules --junitxml=junit/test-results.xml
   displayName: 'Test with pytest'
 
 
