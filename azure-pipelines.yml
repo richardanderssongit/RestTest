@@ -25,16 +25,9 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+    pip install pytest
+    pip install pytest-cov
+    pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+  displayName: 'Test with pytest'
 
-- bash: 'pytest --junitxml=$(Build.StagingDirectory)/010.xml'
-  workingDirectory: 'Tests'
-  displayName: 'Run test 010'
 
-- task: PublishTestResults@2
-  displayName: 'Publish test result /010.xml'
-  inputs:
-    testResultsFiles: '$(Build.StagingDirectory)/010.xml'
-    testRunTitle: 010
