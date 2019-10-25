@@ -45,18 +45,18 @@ class MyTestCase(unittest.TestCase):
 
     def test_edit_profile(self):
 
-        res = requests.get('https://us-central1-mock-backend-60a04.cloudfunctions.net/getProfile/ri')
+        res = requests.get(self.base_url + 'getProfile/ri')
         self.assertEqual(requests.codes.ok, res.status_code)
         if res.json()['familyName'] == 'Andersson':
             lastname = 'Ander'
         else:
             lastname = 'Andersson'
 
-        res = requests.post(self.base_url + 'ri',
+        res = requests.post(self.base_url + 'setProfile/ri',
                             data={'firstName': 'Richie', 'familyName': lastname})
         self.assertEqual(requests.codes.ok, res.status_code)
 
-        res = requests.get(self.base_url + 'ri')
+        res = requests.get(self.base_url + 'getProfile/ri')
         self.assertEqual(lastname, res.json()['familyName'])
 
     def test_edit_profile_2(self):
@@ -79,7 +79,6 @@ class MyTestCase(unittest.TestCase):
 
         res = requests.get('https://us-central1-mock-backend-60a04.cloudfunctions.net/getProfile/ri')
         self.assertEqual(requests.codes.ok, res.status_code)
-        self.assertEqual(self.profiledata, res.json())
 
     def reset_profile(self):
 
