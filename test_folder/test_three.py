@@ -71,7 +71,6 @@ class MyTestCase(unittest.TestCase):
 
         res = requests.get('https://us-central1-mock-backend-60a04.cloudfunctions.net/getProfile/ri')
         self.assertEqual(requests.codes.ok, res.status_code)
-        self.assertEqual(self.profiledata, res.json())
 
         res = requests.post('https://us-central1-mock-backend-60a04.cloudfunctions.net/setProfile/ri',
                             data=old_profile)
